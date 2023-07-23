@@ -18,10 +18,20 @@ const Login = (props) => {
   };
 
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes('@') && enteredPassword.trim().length > 6
-    );
-  }, []);
+    console.log('*************');
+    const timeoutId = setTimeout(() => {
+      setFormIsValid(
+        enteredEmail.includes('@') && enteredPassword.trim().length > 6
+      );
+    }, 500);
+
+
+    return () => {
+    console.log('################');
+
+      clearTimeout(timeoutId);
+    }
+  }, [enteredEmail, enteredPassword]);
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
